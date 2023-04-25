@@ -1,27 +1,41 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 /** Component for Nav
- * 
+ *
  * Props:
  * - names: array of dog names
- * 
+ *
  * State:
  * - none
- * 
+ *
  * App -> Nav
  */
 
 function Nav({ names }) {
+
+    console.log("nav names", names);
     return (
-        <nav>
+        <div className="Nav">
+            {/* TODO: ul element could be nav element */}
             <ul>
-           { names.map( n => (
-             <li key={n}>
-                <Link to={`/dogs/${n}`}>{n}</Link>
-            </li> 
-            ))}
+                {names.map(name => (
+                    <li key={name}>
+                        <NavLink
+                            to={`/dogs/${name}`}
+                            style={({ isActive, isPending }) => {
+                                return {
+                                    fontWeight: isActive ? "bold" : "",
+                                };
+                            }}
+                            // TODO: names in URL are capitalized
+                            // better to use lowercase - for certain
+                            // case-sensitive browsers.
+                            // best for SEO
+                        >{name}</NavLink>
+                    </li>
+                ))}
             </ul>
-        </nav>
+        </div>
     );
 }
 

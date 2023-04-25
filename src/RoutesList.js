@@ -2,23 +2,24 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import DogList from "./DogList";
 import DogDetails from "./DogDetails";
 
-/** Component for Routes
- * 
+/** Routes for dogs
+ *
  * Props:
- * - none
- * 
+ * dogs: array of dog objects
+ *
  * State:
- * - none
- * 
- * App -> Routes -> { DogList, DogDetails }
+ * -
+ *
+ * App -> RoutesList
  */
 
-function RoutesList({ getDogNames }) {
+function RoutesList({ dogs }) {
     console.debug("RoutesList");
+
     return (
         <Routes>
-            <Route path="/dogs" element={<DogList dogs={() => getDogNames}/>} />
-            <Route path="/dogs/:name" element={<DogDetails />} />
+            <Route path="/dogs" element={<DogList dogs={dogs}/>} />
+            <Route path="/dogs/:name" element={<DogDetails dogs={dogs} />} />
             <Route path="*" element={<Navigate to="/dogs" />} />
         </Routes>
     )
